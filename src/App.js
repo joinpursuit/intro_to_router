@@ -6,6 +6,7 @@ import { About } from './About';
 import { NavBar } from './NavBar';
 import axios from 'axios';
 import { Route, Switch } from 'react-router-dom';
+import { withRouter } from 'react-router';
 
 class App extends Component {
   constructor() {
@@ -33,12 +34,13 @@ class App extends Component {
       return <>LOADING!!!!</>
     }
     return (
+
       <div className="App">
         <NavBar />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/about" component={About} />
-          <Route exact path="/pokemon" render={(props) => <Pokemon {...props} showing={this.state.showing}
+          <Route exact path="/pokemon/:id" render={(props) => <Pokemon {...props} showing={this.state.showing}
           toggleShowing={this.toggleShowing} pokemon={this.state.pokemon} />} />
           <Route  path="/*" component={Home} />
         </Switch>
@@ -47,4 +49,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);
